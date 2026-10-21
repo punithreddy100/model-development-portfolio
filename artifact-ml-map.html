@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Machine Learning Algorithm Map</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --navy: #0f172a;
+      --blue: #2563eb;
+      --green: #10b981;
+      --text: #1f2937;
+      --muted: #475569;
+      --line: #dfeaf6;
+      --shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef5ff 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+    .topbar {
+      background: var(--navy);
+      color: white;
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+    }
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .brand { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav a { color: #ebf2ff; font-weight: 600; text-decoration: none; }
+    .hero { padding: 60px 0 24px; }
+    .hero-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.12);
+      color: var(--blue);
+      border: 1px solid rgba(37,99,235,0.18);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.3rem, 4vw, 3.5rem);
+      color: var(--navy);
+    }
+    .lead {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+    .section { padding: 24px 0 32px; }
+    .content-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      padding: 24px;
+    }
+    h2 { margin-top: 0; color: var(--navy); }
+    h3 {
+      margin: 24px 0 10px;
+      color: var(--navy);
+      font-size: 1.3rem;
+    }
+    p, li {
+      color: var(--muted);
+    }
+    ul { padding-left: 18px; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: var(--navy);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 24px 0 40px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">Punith Reddy</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">Bio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-box">
+          <div class="eyebrow">Artifact</div>
+          <h1>Machine Learning Algorithm Map</h1>
+          <p class="lead">
+            Machine learning is an important part of modern artificial intelligence because it enables computer systems to identify patterns,
+            learn from data, and support predictions or decisions. Different algorithms are designed for different purposes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="content-box">
+          <h2>Title</h2>
+          <p>Machine Learning Algorithm Map: Learning Types, Applications, and Generative AI</p>
+
+          <h3>Introduction</h3>
+          <p>
+            Machine learning is an important part of modern artificial intelligence because it enables computer systems to identify patterns,
+            learn from data, and support predictions or decisions. Different algorithms are designed for different purposes. Some estimate
+            numerical values, others classify information or discover hidden patterns, and generative models produce new content based on patterns
+            learned during training. Understanding these differences is important when choosing an appropriate approach for a practical problem.
+          </p>
+          <p>
+            This visual framework organizes machine learning algorithms by their learning approaches and application domains, including tabular data,
+            computer vision, natural language processing (NLP), and generative AI. It is intended to make technical concepts easier to understand
+            for students, aspiring AI professionals, and readers who want an accessible introduction to machine learning.
+          </p>
+
+          <h3>Description</h3>
+          <p>
+            The Machine Learning Algorithm Map presents ten algorithms and model families through a visual classification framework. It highlights the
+            purpose of each algorithm, its general learning approach, and examples of how it can be applied in real-world settings.
+          </p>
+          <p>
+            The framework covers linear regression, decision trees, random forests, gradient boosting, support vector machines, convolutional neural
+            networks, K-means clustering, principal component analysis, transformer models, diffusion models, and generative adversarial networks.
+            These methods represent a range of approaches used in predictive analytics, pattern recognition, language processing, and content generation.
+          </p>
+          <p>
+            The framework also emphasizes that algorithm categories can overlap. For example, transformer models can support both language classification
+            and text generation, while convolutional neural networks can be used for image classification and other visual tasks. The most appropriate
+            choice depends on the data, intended outcome, available resources, and evaluation requirements.
+          </p>
+
+          <h3>Objective</h3>
+          <p>The objective of this artifact is to demonstrate an understanding of how machine learning algorithms differ in their learning approaches,
+            technical functions, and application areas. It aims to:</p>
+          <ul>
+            <li>Classify commonly used algorithms and model architectures.</li>
+            <li>Distinguish supervised learning from unsupervised learning.</li>
+            <li>Explain the role of machine learning in tabular data analysis, computer vision, and NLP.</li>
+            <li>Highlight generative AI approaches for creating text, images, and other content.</li>
+            <li>Connect technical concepts to realistic business and technology applications.</li>
+            <li>Communicate machine learning concepts through an organized and accessible visual framework.</li>
+          </ul>
+
+          <h3>Process</h3>
+          <p>
+            The framework was developed by first identifying the major learning approaches and application domains described in the assignment.
+            Algorithms were then grouped according to their primary functions and the types of problems they commonly address.
+          </p>
+          <p>
+            Supervised methods were associated with prediction tasks involving labeled examples. Unsupervised methods were associated with discovering
+            structure in data without predefined target labels. Generative models were presented separately to highlight their ability to create new content.
+            This distinction is useful because generative modeling describes a modeling objective or capability rather than a single, mutually exclusive learning category.
+          </p>
+          <p>
+            The next step was to identify practical examples for each method. Linear regression was associated with numerical forecasting, decision trees
+            with rule-based decisions, random forests with predictive modeling, and gradient boosting with structured-data prediction. CNNs were connected
+            to visual recognition, while transformers were linked to language understanding and generation. K-means and PCA were included to demonstrate
+            clustering and dimensionality reduction, respectively. Diffusion models and GANs were included to illustrate different approaches to generative AI.
+          </p>
+          <p>
+            Finally, the information was organized into a visual framework with distinct domain sections, concise explanations, and connecting elements.
+            The design was intended to help readers compare algorithms while recognizing that many methods can serve more than one application domain.
+          </p>
+
+          <h3>Tools and Technologies Used</h3>
+          <ul>
+            <li><strong>ChatGPT:</strong> Assisted with organizing concepts, simplifying explanations, and developing an initial visual framework.</li>
+            <li><strong>Visual design and infographic generation:</strong> Used to develop a structured presentation of algorithm categories and relationships.</li>
+            <li><strong>Google Machine Learning Crash Course:</strong> Used as a learning resource for foundational predictive modeling concepts.</li>
+            <li><strong>scikit-learn documentation:</strong> Used as a reference for supervised learning, clustering, dimensionality reduction, and common algorithm applications.</li>
+            <li><strong>IBM generative AI resources:</strong> Used to understand transformer models, diffusion models, GANs, and related generative architectures.</li>
+          </ul>
+
+          <h3>Value Proposition</h3>
+          <p>
+            This artifact demonstrates the ability to translate technical information into a structured visual resource. Rather than presenting algorithms as an
+            unrelated list, it connects their functions to practical problems and application domains. This approach supports communication between technical
+            and nontechnical audiences and demonstrates an understanding of how algorithm selection relates to business objectives.
+          </p>
+
+          <h3>Unique Value</h3>
+          <p>
+            The distinctive value of this framework is its comparison of traditional machine learning techniques and generative AI within one visual structure.
+            It demonstrates that selecting a model involves more than recognizing an algorithm's name; it requires understanding the data, the problem, the
+            expected output, and the model's limitations.
+          </p>
+          <p>
+            The framework also highlights the importance of distinguishing learning approaches from application domains. This distinction can help readers avoid
+            assuming that an algorithm is limited to a single type of problem.
+          </p>
+
+          <h3>Relevance</h3>
+          <p>
+            Machine learning knowledge is relevant to roles involving data analytics, business intelligence, software development, AI engineering, and technology
+            consulting. For example, a business analyst may use tree-based models to estimate customer churn, a computer vision engineer may use CNN-based
+            architectures to inspect images, and an AI developer may use a transformer-based model to build a conversational assistant.
+          </p>
+          <p>
+            The framework provides a starting point for evaluating these approaches. In professional applications, model selection should also consider data quality,
+            predictive performance, interpretability, computational cost, privacy, fairness, and the consequences of incorrect predictions.
+          </p>
+
+          <h3>References</h3>
+          <ul>
+            <li>Google for Developers. (n.d.). <em>Machine learning crash course</em>. https://developers.google.com/machine-learning/crash-course/</li>
+            <li>IBM. (2026, October 2). <em>What is generative AI?</em> https://www.ibm.com/think/topics/generative-ai</li>
+            <li>scikit-learn developers. (n.d.). <em>Machine learning in Python</em>. https://scikit-learn.com/</li>
+          </ul>
+
+          <a class="back-btn" href="index.html">← Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">Machine Learning Algorithm Map • Portfolio Artifact</div>
+  </footer>
+</body>
+</html>

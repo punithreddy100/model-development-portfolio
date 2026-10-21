@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Punith Reddy | Portfolio</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --navy: #0f172a;
+      --blue: #2563eb;
+      --green: #10b981;
+      --text: #1f2937;
+      --muted: #475569;
+      --line: #dfeaf6;
+      --shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef5ff 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    .container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+    .topbar {
+      background: var(--navy);
+      color: white;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+    }
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+    }
+    .nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav a { color: #ebf2ff; font-weight: 600; }
+    .hero { padding: 68px 0 32px; }
+    .hero-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 32px;
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--blue);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--navy);
+    }
+    .subtitle {
+      margin: 0;
+      max-width: 760px;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+    .section { padding: 20px 0 36px; }
+    .section-head {
+      margin-bottom: 22px;
+    }
+    .section-head h2 {
+      margin: 0 0 10px;
+      text-align: center;
+      color: var(--navy);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+    }
+    .section-head p {
+      margin: 0 auto;
+      max-width: 720px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+    .badge {
+      display: inline-block;
+      padding: 7px 10px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .badge.blue { background: rgba(37,99,235,0.12); color: var(--blue); }
+    .badge.green { background: rgba(16,185,129,0.12); color: var(--green); }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      color: var(--navy);
+    }
+    .card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+    }
+    .button.secondary {
+      background: var(--navy);
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 0 40px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">Punith Reddy</div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#artifacts">Artifacts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="about">
+      <div class="container">
+        <div class="hero-box">
+          <div class="eyebrow">Portfolio</div>
+          <h1>Machine Learning & AI Portfolio</h1>
+          <p class="subtitle">
+            Hello! I’m Punith Reddy, a software developer with a growing interest in artificial intelligence,
+            machine learning, and how these tools can solve real-world problems. This portfolio highlights my
+            learning journey, projects, and artifacts that reflect my understanding of ML concepts and practical application.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="artifacts">
+      <div class="container">
+        <div class="section-head">
+          <h2>Artifacts</h2>
+          <p>Below are the main artifacts in my portfolio. Click any card to open the full page.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="badge blue">Artifact 1</span>
+            <h3>Machine Learning Algorithm Map</h3>
+            <p>A visual overview of major ML approaches, model families, and practical application areas.</p>
+            <a class="button" href="artifact-ml-map.html">Open Artifact</a>
+          </article>
+
+          <article class="card">
+            <span class="badge green">About</span>
+            <h3>Detailed Bio</h3>
+            <p>A brief profile covering my professional background, interests, and learning goals.</p>
+            <a class="button secondary" href="about.html">View Bio</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">Punith Reddy • Portfolio</div>
+  </footer>
+</body>
+</html>
