@@ -6,25 +6,32 @@
   <title>Machine Learning Algorithm Map</title>
   <style>
     :root {
-      --bg: #f4f7fb;
+      --bg: #eff4fb;
       --panel: #ffffff;
-      --navy: #0f172a;
-      --blue: #2563eb;
-      --green: #10b981;
-      --text: #1f2937;
-      --muted: #475569;
+      --navy: #0f2137;
+      --blue: #1a5fb7;
+      --cyan: #2da9c5;
+      --green: #39b7a3;
+      --teal: #7ed7d8;
+      --orange: #f5923f;
+      --purple: #7d68d2;
+      --text: #1e2b39;
+      --muted: #4b5d70;
       --line: #dfeaf6;
       --shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
     }
+
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #eef5ff 0%, var(--bg) 100%);
+      background: linear-gradient(180deg, #edf4ff 0%, var(--bg) 100%);
       color: var(--text);
       line-height: 1.7;
     }
-    .container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+
+    .container { width: min(1280px, calc(100% - 28px)); margin: 0 auto; }
+    a { color: var(--blue); text-decoration: none; }
     .topbar {
       background: var(--navy);
       color: white;
@@ -41,25 +48,38 @@
       gap: 18px;
       flex-wrap: wrap;
     }
-    .brand { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-    .nav { display: flex; gap: 18px; flex-wrap: wrap; }
-    .nav a { color: #ebf2ff; font-weight: 600; text-decoration: none; }
-    .hero { padding: 60px 0 24px; }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+    }
+    .nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      color: #ebf2ff;
+      font-weight: 600;
+    }
+
+    .hero { padding: 36px 0 18px; }
     .hero-box {
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 28px;
+      border-radius: 20px;
       box-shadow: var(--shadow);
+      padding: 28px 32px;
     }
     .eyebrow {
       display: inline-block;
       margin-bottom: 16px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(37,99,235,0.12);
+      background: rgba(37, 99, 235, 0.1);
       color: var(--blue);
-      border: 1px solid rgba(37,99,235,0.18);
+      border: 1px solid rgba(37, 99, 235, 0.16);
       font-size: 0.76rem;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -67,16 +87,162 @@
     }
     h1 {
       margin: 0 0 14px;
-      font-size: clamp(2.3rem, 4vw, 3.5rem);
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 1.1;
+      color: var(--navy);
+      text-align: center;
+    }
+    .subtitle {
+      margin: 0 auto;
+      max-width: 900px;
+      text-align: center;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .framework {
+      margin-top: 24px;
+      background: #eff5fb;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 18px 10px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .visual-header {
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.04em;
       color: var(--navy);
     }
-    .lead {
-      margin: 0;
-      max-width: 760px;
+    .visual-subtitle {
+      text-align: center;
       color: var(--muted);
-      font-size: 1.08rem;
+      font-style: italic;
+      margin-top: -8px;
+      margin-bottom: 18px;
     }
-    .section { padding: 24px 0 32px; }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .panel {
+      min-height: 760px;
+      padding: 10px 10px 12px;
+      border-right: 1px solid rgba(15, 23, 42, 0.08);
+    }
+    .panel:last-child { border-right: none; }
+
+    .panel.tabular { background: rgba(26, 95, 183, 0.92); }
+    .panel.computer { background: rgba(80, 175, 190, 0.92); }
+    .panel.nlp { background: rgba(61, 164, 192, 0.9); }
+    .panel.generative { background: rgba(245, 145, 78, 0.9); }
+
+    .panel-header {
+      color: white;
+      font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 14px 18px 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .panel-header .icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .panel-sub { color: rgba(255,255,255,0.92); font-size: 0.96rem; margin: 0 18px 18px; }
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 10px 0;
+    }
+    .algo-card {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 12px;
+      padding: 12px 12px 10px;
+      color: var(--navy);
+      box-shadow: 0 4px 10px rgba(15,23,42,0.05);
+    }
+    .algo-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin: 0 0 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .algo-title .small-icon { font-size: 1.2rem; }
+    .algo-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: rgba(45, 169, 197, 0.14);
+      color: var(--navy);
+    }
+    .tag.supervised { background: rgba(26, 95, 183, 0.15); color: #0c3d88; }
+    .tag.unsupervised { background: rgba(125, 104, 210, 0.14); color: #4e3d9b; }
+    .tag.generative { background: rgba(245, 146, 63, 0.15); color: #915518; }
+    .tag.computer { background: rgba(64, 176, 176, 0.18); color: #16515b; }
+    .tag.tabular { background: rgba(83, 120, 180, 0.14); color: #2f4d7c; }
+    .tag.nlp { background: rgba(50, 150, 150, 0.12); color: #1c5b62; }
+
+    .legend {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      padding: 12px 10px 6px;
+      border-top: 1px solid rgba(15, 23, 42, 0.12);
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.94rem;
+    }
+    .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot.blue { background: #1a5fb7; }
+    .dot.purple { background: #7d68d2; }
+    .dot.orange { background: #f5923f; }
+    .dot.cyan { background: #2da9c5; }
+
+    .section { padding: 30px 0; }
     .content-box {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -86,14 +252,12 @@
     }
     h2 { margin-top: 0; color: var(--navy); }
     h3 {
-      margin: 24px 0 10px;
+      margin: 22px 0 10px;
       color: var(--navy);
-      font-size: 1.3rem;
+      font-size: 1.34rem;
     }
-    p, li {
-      color: var(--muted);
-    }
-    ul { padding-left: 18px; }
+    p, li { color: var(--muted); }
+    ul { padding-left: 20px; }
     .back-btn {
       display: inline-block;
       margin-top: 18px;
@@ -107,7 +271,18 @@
     .footer {
       text-align: center;
       color: var(--muted);
-      padding: 24px 0 40px;
+      padding: 18px 0 40px;
+    }
+
+    @media (max-width: 980px) {
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .panel { min-height: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .grid-4 { grid-template-columns: 1fr; }
+      .panel { border-right: none; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+      .panel:last-child { border-bottom: none; }
     }
   </style>
 </head>
@@ -128,10 +303,142 @@
         <div class="hero-box">
           <div class="eyebrow">Artifact</div>
           <h1>Machine Learning Algorithm Map</h1>
-          <p class="lead">
-            Machine learning is an important part of modern artificial intelligence because it enables computer systems to identify patterns,
-            learn from data, and support predictions or decisions. Different algorithms are designed for different purposes.
+          <p class="subtitle">
+            Different algorithms. Different strengths. Multiple domains.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="framework">
+          <div class="visual-header">MACHINE LEARNING ALGORITHM MAP</div>
+          <div class="visual-subtitle">Different algorithms. Different strengths. Multiple domains.</div>
+
+          <div class="grid-4">
+            <div class="panel tabular">
+              <div class="panel-header"><span class="icon">🗃️</span> Tabular Data</div>
+              <div class="panel-sub">Structured data in rows and columns</div>
+              <div class="cards">
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">📈</span> Linear Regression</div>
+                  <p class="algo-desc">Predicts numeric values using relationships between variables.</p>
+                  <div class="tags">
+                    <span class="tag supervised">Supervised</span>
+                    <span class="tag tabular">Tabular</span>
+                  </div>
+                </div>
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">🌳</span> Decision Tree</div>
+                  <p class="algo-desc">Uses rule-based splits to classify or predict outcomes.</p>
+                  <div class="tags">
+                    <span class="tag supervised">Supervised</span>
+                    <span class="tag tabular">Tabular</span>
+                  </div>
+                </div>
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">🌲</span> Random Forest</div>
+                  <p class="algo-desc">Combines many decision trees for stronger predictive performance.</p>
+                  <div class="tags">
+                    <span class="tag supervised">Supervised</span>
+                    <span class="tag tabular">Tabular</span>
+                  </div>
+                </div>
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">📊</span> Gradient Boosting</div>
+                  <p class="algo-desc">Corrects errors in sequence to improve prediction accuracy.</p>
+                  <div class="tags">
+                    <span class="tag supervised">Supervised</span>
+                    <span class="tag tabular">Tabular</span>
+                  </div>
+                </div>
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">📉</span> Support Vector Machine</div>
+                  <p class="algo-desc">Finds a boundary that separates classes or predicts values.</p>
+                  <div class="tags">
+                    <span class="tag supervised">Supervised</span>
+                    <span class="tag tabular">Tabular</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel computer">
+              <div class="panel-header"><span class="icon">🖼️</span> Computer Vision</div>
+              <div class="panel-sub">Image and video data</div>
+              <div class="cards">
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">🧠</span> CNN</div>
+                  <p class="algo-desc">Learns visual features from images through convolutional filters.</p>
+                  <div class="tags">
+                    <span class="tag supervised">Supervised</span>
+                    <span class="tag computer">Computer Vision</span>
+                  </div>
+                </div>
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">◉</span> K-means Clustering</div>
+                  <p class="algo-desc">Groups similar data points by proximity to cluster centers.</p>
+                  <div class="tags">
+                    <span class="tag unsupervised">Unsupervised</span>
+                    <span class="tag tabular">Tabular / Image</span>
+                  </div>
+                </div>
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">📐</span> PCA</div>
+                  <p class="algo-desc">Reduces dimensions while preserving the most important information.</p>
+                  <div class="tags">
+                    <span class="tag unsupervised">Unsupervised</span>
+                    <span class="tag tabular">Tabular / Image</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel nlp">
+              <div class="panel-header"><span class="icon">📄</span> NLP</div>
+              <div class="panel-sub">Text data</div>
+              <div class="cards">
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">🔗</span> Transformer</div>
+                  <p class="algo-desc">Uses attention to model context and relationships in text.</p>
+                  <div class="tags">
+                    <span class="tag supervised">Self-supervised</span>
+                    <span class="tag nlp">NLP</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel generative">
+              <div class="panel-header"><span class="icon">✨</span> Generative AI</div>
+              <div class="panel-sub">Creates new content</div>
+              <div class="cards">
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">🖼️</span> Diffusion Model</div>
+                  <p class="algo-desc">Learns to reverse noise to create realistic generated content.</p>
+                  <div class="tags">
+                    <span class="tag generative">Generative</span>
+                    <span class="tag computer">Image Generation</span>
+                  </div>
+                </div>
+                <div class="algo-card">
+                  <div class="algo-title"><span class="small-icon">🧬</span> GAN</div>
+                  <p class="algo-desc">Generator and discriminator compete to produce realistic outputs.</p>
+                  <div class="tags">
+                    <span class="tag generative">Generative</span>
+                    <span class="tag computer">Image / Data Generation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="legend">
+            <div class="legend-item"><span class="dot blue"></span> Supervised = learns from labeled examples</div>
+            <div class="legend-item"><span class="dot purple"></span> Unsupervised = discovers structure in unlabeled data</div>
+            <div class="legend-item"><span class="dot orange"></span> Generative models create new content</div>
+          </div>
         </div>
       </div>
     </section>
