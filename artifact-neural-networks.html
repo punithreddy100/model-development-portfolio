@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A visual guide to neural network structure, components, and the model-training loop." />
+  <title>Neural Network Components | Punith Reddy Portfolio</title>
+  <style>
+    :root {
+      --bg: #eff4fb;
+      --panel: #ffffff;
+      --navy: #0f2137;
+      --blue: #1a5fb7;
+      --cyan: #2da9c5;
+      --green: #39a98f;
+      --orange: #e58b3a;
+      --purple: #7864c8;
+      --text: #1e2b39;
+      --muted: #4b5d70;
+      --line: #dfeaf6;
+      --shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #edf4ff 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .topbar {
+      background: var(--navy); color: white; padding: 14px 0; position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+    }
+    .topbar .container { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .brand { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.92rem; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    .nav a { color: #ebf2ff; font-weight: 600; }
+    .hero { padding: 36px 0 18px; }
+    .hero-box, .content-box, .framework {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow);
+    }
+    .hero-box { padding: 28px 32px; }
+    .eyebrow {
+      display: inline-block; margin-bottom: 14px; padding: 7px 12px; border-radius: 999px;
+      background: rgba(37, 99, 235, 0.1); color: var(--blue); border: 1px solid rgba(37, 99, 235, 0.16);
+      font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(2.2rem, 4vw, 3.7rem); line-height: 1.12; color: var(--navy); text-align: center; }
+    .subtitle { margin: 0 auto; max-width: 850px; text-align: center; font-size: 1.08rem; color: var(--muted); }
+    .section { padding: 22px 0; }
+    .framework { padding: 24px; background: #f8fbff; }
+    .visual-header { text-align: center; color: var(--navy); font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: 0.025em; }
+    .visual-subtitle { text-align: center; color: var(--muted); margin: 2px 0 22px; }
+    .flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+    .stage {
+      position: relative; min-height: 210px; padding: 18px 16px; border: 1px solid var(--line); border-radius: 16px;
+      background: white; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05); text-align: center;
+    }
+    .stage:not(:last-child)::after { content: "→"; position: absolute; right: -15px; top: 42%; z-index: 2; color: var(--blue); font-size: 1.5rem; font-weight: 800; }
+    .stage-label { display: inline-block; padding: 5px 10px; border-radius: 999px; font-size: .75rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .input .stage-label { color: #164a8a; background: #e1efff; }
+    .hidden .stage-label { color: #16675b; background: #def5ed; }
+    .output .stage-label { color: #79500f; background: #fff0d9; }
+    .loss .stage-label { color: #5a469e; background: #eee9ff; }
+    .nodes { display: flex; justify-content: center; gap: 9px; flex-wrap: wrap; margin: 20px 0 12px; }
+    .node { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; border: 2px solid currentColor; font-size: .8rem; font-weight: 800; }
+    .input .node { color: var(--blue); background: #eef6ff; }
+    .hidden .node { color: var(--green); background: #effbf7; }
+    .output .node { color: var(--orange); background: #fff8ed; }
+    .loss .node { color: var(--purple); background: #f5f2ff; }
+    .stage h3 { margin: 8px 0 5px; color: var(--navy); font-size: 1.08rem; }
+    .stage p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .loop {
+      margin-top: 16px; padding: 15px 18px; background: #eaf3ff; border: 1px solid #d5e6fb; border-radius: 14px;
+      color: var(--navy); text-align: center;
+    }
+    .loop strong { color: var(--blue); }
+    .component-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+    .component {
+      background: white; border: 1px solid var(--line); border-radius: 15px; padding: 18px;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+    }
+    .component .number { color: var(--blue); font-size: .76rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .component h3 { margin: 5px 0 7px; color: var(--navy); font-size: 1.12rem; }
+    .component p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .equation { display: block; margin-top: 10px; padding: 8px 10px; border-radius: 9px; background: #f1f6fc; color: #18395d; font-family: "Courier New", monospace; font-size: .86rem; overflow-wrap: anywhere; }
+    .training { margin-top: 20px; padding: 20px; border-radius: 16px; background: #102a46; color: white; }
+    .training h3 { margin: 0 0 8px; color: white; }
+    .training p { margin: 0; color: #e4effb; }
+    .training-steps { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .training-steps span { padding: 7px 11px; border-radius: 999px; background: rgba(255,255,255,.12); font-weight: 700; font-size: .84rem; }
+    .content-box { padding: 24px; }
+    h2 { margin: 0 0 12px; color: var(--navy); }
+    .content-box h3 { margin: 24px 0 8px; color: var(--navy); font-size: 1.25rem; }
+    .content-box p, .content-box li { color: var(--muted); }
+    .content-box p { margin: 0 0 12px; }
+    ul { padding-left: 22px; }
+    .back-btn { display: inline-block; margin-top: 18px; padding: 11px 17px; border-radius: 12px; background: var(--navy); color: white; font-weight: 700; }
+    .back-btn:hover { text-decoration: none; background: #1b3c60; }
+    .footer { text-align: center; color: var(--muted); padding: 18px 0 40px; }
+    @media (max-width: 850px) {
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stage:not(:last-child)::after { display: none; }
+      .component-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .hero-box, .framework, .content-box { padding: 20px; }
+      .flow, .component-grid { grid-template-columns: 1fr; }
+      .stage { min-height: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">Punith Reddy</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">Bio</a>
+        <a href="artifact-ml-map.html">Artifact 1</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-box">
+          <div class="eyebrow">Artifact 2 · Neural Networks</div>
+          <h1>Inside a Neural Network</h1>
+          <p class="subtitle">A visual guide to how layers, neurons, weights, activation functions, loss, and optimization work together to turn input data into a learned prediction.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="visual-title">
+      <div class="container">
+        <div class="framework">
+          <div class="visual-header" id="visual-title">FROM INPUT TO LEARNING</div>
+          <div class="visual-subtitle">A simplified feedforward network and its training feedback loop</div>
+          <div class="flow" role="img" aria-label="Input features flow through hidden layers to an output prediction. The prediction is compared with the target using a loss function, and an optimizer updates the weights. This process repeats during training.">
+            <article class="stage input">
+              <span class="stage-label">01 · Input layer</span>
+              <div class="nodes" aria-hidden="true"><span class="node">x₁</span><span class="node">x₂</span><span class="node">x₃</span></div>
+              <h3>Represent the example</h3>
+              <p>Feature values enter the network as numbers, such as measurements or encoded pixels.</p>
+            </article>
+            <article class="stage hidden">
+              <span class="stage-label">02 · Hidden layers</span>
+              <div class="nodes" aria-hidden="true"><span class="node">●</span><span class="node">●</span><span class="node">●</span><span class="node">●</span></div>
+              <h3>Learn useful patterns</h3>
+              <p>Neurons combine weighted inputs, add biases, and apply activation functions.</p>
+            </article>
+            <article class="stage output">
+              <span class="stage-label">03 · Output layer</span>
+              <div class="nodes" aria-hidden="true"><span class="node">ŷ</span></div>
+              <h3>Produce a prediction</h3>
+              <p>The output represents the model's estimate, such as a class score or numeric value.</p>
+            </article>
+            <article class="stage loss">
+              <span class="stage-label">04 · Compare</span>
+              <div class="nodes" aria-hidden="true"><span class="node">L</span></div>
+              <h3>Measure the error</h3>
+              <p>A loss function compares prediction ŷ with the known target y during training.</p>
+            </article>
+          </div>
+          <div class="loop"><strong>Training feedback:</strong> the optimizer uses gradients of the loss to adjust weights and biases; the next forward pass tests the updated model. <strong>Repeat</strong> over training examples.</div>
+
+          <div class="component-grid" aria-label="Neural network component definitions">
+            <article class="component"><div class="number">Structure · 01</div><h3>Layers</h3><p>Layers organize neurons by role: the input layer receives features, hidden layers transform them, and the output layer produces the task-specific result. More layers can learn richer representations, but add complexity.</p></article>
+            <article class="component"><div class="number">Structure · 02</div><h3>Neurons</h3><p>A neuron receives values from the previous layer, computes a weighted sum plus a bias, then passes the result through an activation function.</p><span class="equation">z = Σ(wᵢxᵢ) + b</span></article>
+            <article class="component"><div class="number">Connection · 03</div><h3>Weights and biases</h3><p>Weights control how strongly incoming signals influence a neuron; a bias shifts its response. Training adjusts these learnable parameters to reduce prediction error.</p></article>
+            <article class="component"><div class="number">Transformation · 04</div><h3>Activation functions</h3><p>Activations introduce nonlinearity so networks can learn more than simple linear relationships. ReLU is common in hidden layers; sigmoid or softmax may suit particular output tasks.</p></article>
+            <article class="component"><div class="number">Evaluation · 05</div><h3>Loss functions</h3><p>Loss quantifies the difference between predictions and target values. Mean squared error is common for regression; cross-entropy is common for classification. The choice should match the task.</p></article>
+            <article class="component"><div class="number">Learning · 06</div><h3>Optimization algorithms</h3><p>An optimizer updates weights and biases using gradients to reduce loss. Gradient descent and variants such as Adam are commonly used; learning rate influences update size.</p></article>
+          </div>
+
+          <div class="training">
+            <h3>The learning cycle at a glance</h3>
+            <p>A network does not learn from a diagram alone: it learns through repeated predictions, error measurement, and parameter updates using training data.</p>
+            <div class="training-steps"><span>1. Feed features</span><span>2. Forward pass</span><span>3. Calculate loss</span><span>4. Compute gradients</span><span>5. Update parameters</span><span>6. Repeat and evaluate</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="content-box">
+          <h2>Artifact Documentation</h2>
+          <h3>Title</h3>
+          <p>Inside a Neural Network: Components, Data Flow, and the Training Loop</p>
+
+          <h3>Introduction</h3>
+          <p>Neural networks are machine-learning models that learn patterns by transforming input data through connected computational units. Their layered structure is inspired loosely by biological nervous systems, but the model components described here are mathematical operations implemented in software.</p>
+          <p>This artifact provides a concise visual explanation of a basic feedforward network. It follows information from input features to an output prediction, then shows how a loss function and optimizer support learning during training.</p>
+
+          <h3>Description</h3>
+          <p>The infographic introduces input, hidden, and output layers; illustrates neurons and their weighted connections; and explains activation functions, loss functions, and optimization algorithms. It also distinguishes the forward pass, which produces predictions, from the training feedback process that adjusts parameters.</p>
+          <p>The diagram is intentionally simplified. Real networks may contain many layers, different connection patterns, normalization, regularization, and task-specific components. The same core ideas—computation, prediction, measuring error, and parameter updates—provide a useful starting point for understanding them.</p>
+
+          <h3>Objective</h3>
+          <ul>
+            <li>Define the key components of a neural network in clear, accessible language.</li>
+            <li>Show how data flows from input features through hidden layers to a prediction.</li>
+            <li>Explain how weights, activations, loss, and optimization contribute to learning.</li>
+            <li>Connect the architecture diagram to the iterative model-training process.</li>
+            <li>Communicate technical ideas through a readable and responsive visual presentation.</li>
+          </ul>
+
+          <h3>Classification and Representation</h3>
+          <p>The components are grouped by their primary role in the model: <strong>structure</strong> (layers and neurons), <strong>connection and computation</strong> (weights, biases, and activations), and <strong>learning and evaluation</strong> (loss functions and optimization). This classification emphasizes that a neural network is not just a collection of nodes: it is a connected computational system whose parameters are learned against an objective.</p>
+          <p>The left-to-right flow represents inference through the network. The feedback note beneath it represents training: the loss informs gradient-based parameter updates, and another forward pass evaluates the changed parameters. The separation makes clear that loss and optimization guide learning rather than serving as additional prediction layers.</p>
+
+          <h3>Process</h3>
+          <p>I began by identifying the required components and organizing them around two questions: how does information move through a network, and how does the network improve its predictions? I arranged the architecture from input to output, then placed the loss and optimizer in a separate feedback explanation to avoid implying that they are ordinary layers.</p>
+          <p>I used a simple neuron equation to show that a neuron combines inputs using weights and a bias before activation. I kept descriptions brief and paired each term with its role. Examples of common activations, losses, and optimizers are presented as examples rather than universal choices, because appropriate choices depend on the task.</p>
+          <p>The visual design uses consistent color labels, cards, and a responsive layout to distinguish stages while preserving readability on smaller screens. The explanation is intentionally introductory; it does not claim that one architecture or training setup is best for every problem.</p>
+
+          <h3>Tools and Technologies Used</h3>
+          <ul>
+            <li><strong>HTML and CSS:</strong> Used to build the responsive, accessible portfolio artifact and visual diagram.</li>
+            <li><strong>TensorFlow Neural Network Playground:</strong> An interactive resource for experimenting with neural-network architectures and training behavior.</li>
+            <li><strong>TensorFlow documentation:</strong> A reference for foundational concepts and model-training terminology.</li>
+          </ul>
+
+          <h3>Value Proposition</h3>
+          <p>This artifact turns an abstract technical process into a visual sequence that can be followed at a glance. It helps learners and non-specialist audiences connect model architecture to the practical training loop and gives them a vocabulary for discussing how neural networks make and improve predictions.</p>
+
+          <h3>Unique Value</h3>
+          <p>The artifact links component definitions to their relationships. Instead of treating layers, weights, activations, loss, and optimization as isolated terms, it shows how computation produces a prediction and how measured error guides parameter updates. It also calls out the limits of the simplified diagram and the task-dependent nature of design choices.</p>
+
+          <h3>Relevance</h3>
+          <p>Understanding neural-network components is relevant to AI and software development, data science, computer vision, language technology, and predictive modeling. This foundation supports more informed conversations about model complexity, training choices, evaluation, and why performance should be tested on data beyond the examples used to fit a model.</p>
+
+          <h3>References</h3>
+          <ul>
+            <li>TensorFlow. (n.d.). <em>Neural Network Playground</em>. <a href="https://playground.tensorflow.org/">https://playground.tensorflow.org/</a></li>
+            <li>TensorFlow. (n.d.). <em>Basic classification: Classify images of clothing</em>. <a href="https://www.tensorflow.org/tutorials/keras/classification">https://www.tensorflow.org/tutorials/keras/classification</a></li>
+            <li>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep Learning</em>. MIT Press. <a href="https://www.deeplearningbook.org/">https://www.deeplearningbook.org/</a></li>
+          </ul>
+          <a class="back-btn" href="index.html">← Back to Home</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container">Inside a Neural Network • Portfolio Artifact</div></footer>
+</body>
+</html>
