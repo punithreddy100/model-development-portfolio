@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="An accessible visual guide to explainable AI, LLM transparency, validation, and performance metrics." />
+  <title>Explainable AI & Trustworthy LLMs | Punith Reddy Portfolio</title>
+  <style>
+    :root {
+      --bg: #f3f6fb; --panel: #fff; --navy: #10243a; --blue: #2864c5; --teal: #087f82;
+      --gold: #a45b08; --purple: #6752a5; --text: #263648; --muted: #536579; --line: #dce5ef;
+      --shadow: 0 14px 30px rgba(16, 36, 58, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--text); background: linear-gradient(180deg, #edf4ff, var(--bg) 42%); font: 16px/1.65 Arial, Helvetica, sans-serif; }
+    a { color: var(--blue); }
+    a:focus-visible { outline: 3px solid #f0ad4e; outline-offset: 3px; border-radius: 3px; }
+    .container { width: min(1120px, calc(100% - 32px)); margin: auto; }
+    .topbar { background: var(--navy); color: #fff; padding: 13px 0; position: sticky; top: 0; z-index: 5; box-shadow: 0 4px 14px #10243a22; }
+    .topbar .container, .nav { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .brand { color: white; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .9rem; text-decoration: none; }
+    .nav a { color: #eef5ff; font-weight: 700; text-decoration: none; }
+    .hero { padding: 38px 0 20px; }
+    .hero-box, .visual, .doc { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+    .hero-box { padding: 30px; text-align: center; }
+    .eyebrow, .tag { display: inline-block; border-radius: 999px; font-size: .75rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .eyebrow { padding: 7px 12px; color: var(--blue); background: #eaf1ff; border: 1px solid #d5e3ff; }
+    h1 { margin: 12px 0; color: var(--navy); font-size: clamp(2.15rem, 5vw, 3.65rem); line-height: 1.12; }
+    .subtitle { max-width: 820px; margin: auto; color: var(--muted); font-size: 1.08rem; }
+    .section { padding: 18px 0; }
+    .visual { padding: 26px; background: #f9fbfe; }
+    .section-title { margin: 0; color: var(--navy); font-size: clamp(1.55rem, 3vw, 2.2rem); text-align: center; }
+    .section-intro { max-width: 780px; margin: 5px auto 22px; color: var(--muted); text-align: center; }
+    .definition { max-width: 880px; margin: 0 auto 20px; padding: 15px 18px; border-left: 5px solid var(--blue); border-radius: 10px; background: #edf4ff; }
+    .definition strong { color: var(--navy); }
+    .flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .step, .card { position: relative; padding: 18px; background: white; border: 1px solid var(--line); border-radius: 15px; box-shadow: 0 6px 16px #10243a08; }
+    .step-num { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 50%; color: white; background: var(--blue); font-weight: 800; }
+    .step h3, .card h3 { margin: 10px 0 5px; color: var(--navy); font-size: 1.08rem; }
+    .step p, .card p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .tag { margin-top: 12px; padding: 5px 9px; color: var(--blue); background: #eaf1ff; letter-spacing: .02em; }
+    .tag.teal { color: #08676a; background: #e4f6f3; }
+    .tag.gold { color: #84500d; background: #fff1db; }
+    .tag.purple { color: #55418e; background: #eeeaff; }
+    .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .card h2 { margin: 0 0 12px; font-size: 1.25rem; color: var(--navy); }
+    .card ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    .card li { margin: 6px 0; }
+    .company-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .company { padding: 16px; border-top: 4px solid var(--teal); background: #fff; border-radius: 12px; box-shadow: 0 5px 14px #10243a08; }
+    .company:nth-child(2) { border-color: var(--blue); } .company:nth-child(3) { border-color: var(--gold); } .company:nth-child(4) { border-color: var(--purple); }
+    .company h3 { margin: 0 0 7px; color: var(--navy); }
+    .company p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .company a { display: inline-block; margin-top: 10px; font-size: .9rem; font-weight: 700; }
+    .caveat { margin: 14px 0 0; padding: 13px 16px; color: #573d12; background: #fff5e5; border: 1px solid #f4dfbb; border-radius: 12px; }
+    .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .metric { padding: 16px; background: white; border: 1px solid var(--line); border-radius: 13px; }
+    .metric h3 { margin: 0 0 5px; color: var(--navy); font-size: 1rem; }
+    .metric p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .trust-loop { margin-top: 14px; padding: 16px; color: white; background: var(--navy); border-radius: 14px; text-align: center; }
+    .trust-loop strong { color: #9de5d9; }
+    .doc { padding: 25px; }
+    .doc h2 { margin-top: 0; color: var(--navy); }
+    .doc h3 { margin: 24px 0 6px; color: var(--navy); }
+    .doc p, .doc li { color: var(--muted); }
+    .doc p { margin: 0 0 12px; }
+    .doc ul { padding-left: 22px; }
+    .sources a { overflow-wrap: anywhere; }
+    .back-btn { display: inline-block; margin-top: 12px; padding: 10px 15px; border-radius: 10px; color: white; background: var(--navy); font-weight: 700; text-decoration: none; }
+    .footer { padding: 22px 0 38px; text-align: center; color: var(--muted); }
+    @media (max-width: 850px) { .flow, .company-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .hero-box, .visual, .doc { padding: 20px; } .flow, .company-grid, .columns, .metrics { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="index.html">Punith Reddy</a>
+      <nav class="nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="about.html">Bio</a><a href="#sources">Sources</a></nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero"><div class="container"><div class="hero-box">
+      <span class="eyebrow">Artifact 4 · Explainable AI</span>
+      <h1>Can We Trust What AI Tells Us?</h1>
+      <p class="subtitle">A visual guide to explainability, the limits of “black-box” language models, and the validation practices that make AI outputs more accountable.</p>
+    </div></div></section>
+
+    <section class="section" aria-labelledby="map-title"><div class="container"><div class="visual">
+      <h2 class="section-title" id="map-title">FROM MODEL OUTPUT TO RESPONSIBLE USE</h2>
+      <p class="section-intro">Explainability is not a single score or a window into every model parameter. It is a set of methods and evidence that help people understand, question, and evaluate a system in context.</p>
+      <div class="definition"><strong>Explainable AI (XAI)</strong> describes methods that help people understand how an AI system behaves, what evidence may influence an output, where it can fail, and when its use is appropriate. <strong>Transparency</strong> adds information about the system, its data, evaluation, and limits.</div>
+      <div class="flow" role="list" aria-label="Four linked steps for responsible AI use">
+        <article class="step" role="listitem"><span class="step-num" aria-hidden="true">1</span><h3>Ask a question</h3><p>A generative model predicts likely next tokens from context; its output is not automatically a verified fact or a complete account of its reasoning.</p><span class="tag">Probabilistic output</span></article>
+        <article class="step" role="listitem"><span class="step-num" aria-hidden="true">2</span><h3>Inspect the evidence</h3><p>Use documentation, citations, feature or attention analyses, and carefully designed probes to investigate behavior—not to assume a definitive explanation.</p><span class="tag teal">Interpret with care</span></article>
+        <article class="step" role="listitem"><span class="step-num" aria-hidden="true">3</span><h3>Test reliability</h3><p>Evaluate on held-out, relevant examples; check errors, calibration, robustness, and performance across affected groups.</p><span class="tag gold">Measure in context</span></article>
+        <article class="step" role="listitem"><span class="step-num" aria-hidden="true">4</span><h3>Decide with oversight</h3><p>Combine measured evidence with human judgment, clear limitations, monitoring, and a way to challenge or correct consequential decisions.</p><span class="tag purple">Accountable use</span></article>
+      </div>
+    </div></div></section>
+
+    <section class="section" aria-label="Challenges and interpretation limits"><div class="container"><div class="columns">
+      <article class="card"><h2>Why explanation is hard</h2><ul>
+        <li><strong>Distributed computation:</strong> billions of learned parameters interact; no single part provides a complete, simple reason for an answer.</li>
+        <li><strong>Post-hoc limits:</strong> an explanation created after an output may be plausible without faithfully describing the computation that produced it.</li>
+        <li><strong>Data and bias:</strong> training data can contain gaps, noise, and social biases that appear in generated outputs.</li>
+        <li><strong>Context changes behavior:</strong> prompts, tools, system settings, and model versions can change results, so one example is not enough.</li>
+        <li><strong>High-stakes obligations:</strong> privacy, safety, documentation, and applicable regulations affect what must be tested and disclosed.</li>
+      </ul></article>
+      <article class="card"><h2>Useful tools—not proof</h2><ul>
+        <li><strong>Feature attribution:</strong> methods such as SHAP or LIME estimate which inputs influence a particular prediction, subject to method and data assumptions.</li>
+        <li><strong>Attention and probing:</strong> visualizations and controlled tests can reveal patterns, but attention weights alone are not a complete explanation.</li>
+        <li><strong>Model documentation:</strong> model cards, system cards, and transparency reports describe intended uses, evaluation, and known limitations.</li>
+        <li><strong>Human review:</strong> domain experts can verify sources, flag harmful errors, and decide when the system should not be used.</li>
+      </ul></article>
+    </div></div></section>
+
+    <section class="section" aria-labelledby="industry-title"><div class="container"><div class="visual">
+      <h2 class="section-title" id="industry-title">INDUSTRY TRANSPARENCY: PUBLIC EVIDENCE</h2>
+      <p class="section-intro">Organizations publish different forms of documentation, evaluation, and research. These are useful transparency signals; they do not make a model fully interpretable.</p>
+      <div class="company-grid">
+        <article class="company"><h3>OpenAI</h3><p>Publishes transparency and safety materials, including regulatory reporting and service documentation describing capabilities, safeguards, and limitations.</p><a href="https://cdn.openai.com/trust-and-transparency/dsa-2024-qualitative.pdf">OpenAI DSA report ↗</a></article>
+        <article class="company"><h3>Meta</h3><p>Llama releases include public model resources and documentation that support inspection and external experimentation; release access does not disclose every training detail.</p><a href="https://github.com/meta-llama/llama-models">Llama model resources ↗</a></article>
+        <article class="company"><h3>Google DeepMind</h3><p>Research and tools such as SynthID contribute to documenting and identifying some AI-generated media; provenance is distinct from explaining a model's internal decision.</p><a href="https://deepmind.google/models/synthid/">Google DeepMind SynthID ↗</a></article>
+        <article class="company"><h3>Anthropic</h3><p>Publishes model and safety research intended to communicate evaluations, behavior, and limitations. Public-facing documentation supports scrutiny, not a complete account of internal reasoning.</p><a href="https://www.anthropic.com/research">Anthropic research ↗</a></article>
+      </div>
+      <p class="caveat"><strong>Important distinction:</strong> asking a model to “think aloud” can produce a useful explanation, but generated rationale is not guaranteed to faithfully reveal the model’s internal computation. Verify important claims independently.</p>
+    </div></div></section>
+
+    <section class="section" aria-labelledby="validation-title"><div class="container"><div class="visual">
+      <h2 class="section-title" id="validation-title">VALIDATE BEFORE YOU TRUST</h2>
+      <p class="section-intro">A trustworthy evaluation matches the model, task, users, and risks. No single metric proves that a system is safe, fair, or reliable.</p>
+      <div class="metrics">
+        <article class="metric"><h3>Task quality</h3><p>Accuracy for balanced classification; precision, recall, and F1 when false positives and false negatives have different costs.</p></article>
+        <article class="metric"><h3>Confidence quality</h3><p>Calibration checks whether confidence aligns with observed correctness. A confident answer can still be wrong.</p></article>
+        <article class="metric"><h3>Robustness &amp; safety</h3><p>Test edge cases, distribution shifts, adversarial prompts, harmful outputs, and failure recovery.</p></article>
+        <article class="metric"><h3>Fairness</h3><p>Compare relevant error rates across groups; investigate differences in context rather than relying on one aggregate score.</p></article>
+        <article class="metric"><h3>LLM-specific checks</h3><p>Assess factuality, groundedness, citation support, instruction following, and human-rated usefulness with documented criteria.</p></article>
+        <article class="metric"><h3>Validation process</h3><p>Use representative held-out data, independent review, repeated tests, version tracking, and post-deployment monitoring.</p></article>
+      </div>
+      <div class="trust-loop"><strong>Trustworthy use =</strong> understandable evidence + fit-for-purpose validation + disclosed limits + human accountability</div>
+    </div></div></section>
+
+    <section class="section"><div class="container"><article class="doc">
+      <h2>Explanatory note</h2>
+      <p>This visual follows an AI output through four questions: what did the model produce, what evidence can help us interpret it, how well does it perform under relevant tests, and who remains accountable for its use? The main classification groups the material into explainability challenges, interpretation tools, public industry transparency, and validation. This organization distinguishes methods that investigate model behavior from evaluations that measure outcomes, while showing how both inform human decisions.</p>
+      <p>Large language models are complex and context-sensitive, so post-hoc explanations, attention visualizations, and generated step-by-step rationales should be treated as clues rather than definitive access to internal reasoning. Validation complements explainability: task metrics, calibration, subgroup analysis, robustness tests, and human review expose different failure modes. Together with documentation and ongoing monitoring, these practices help people make better-informed decisions without treating any metric or explanation as proof of trustworthiness. The restrained colors, numbered flow, and short descriptions are intended to make the relationships readable for a non-technical audience.</p>
+      <h3>Reflection on learning</h3>
+      <p>The key learning is that transparency and explainability are related but not interchangeable: a report can explain what was tested and what is unknown without revealing a model’s complete internal process. I also learned to question explanations that sound convincing and to select validation measures based on the consequences of errors. A remaining challenge is that generative outputs are open-ended, so evaluation needs representative scenarios, human judgment, and monitoring—not just one benchmark score. These ideas apply wherever AI outputs influence people, especially in high-impact settings.</p>
+      <h3>Sources and further reading</h3>
+      <ul class="sources">
+        <li>OpenAI, <a href="https://cdn.openai.com/trust-and-transparency/dsa-2024-qualitative.pdf">Digital Services Act Transparency Report: Qualitative Information</a>.</li>
+        <li>Microsoft, <a href="https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/transparency-note">Transparency Note for Azure OpenAI models</a>.</li>
+        <li>Meta, <a href="https://github.com/meta-llama/llama-models">Llama model resources</a>.</li>
+        <li>Google DeepMind, <a href="https://deepmind.google/models/synthid/">SynthID</a> and <a href="https://deepmind.google/research/publications/">research publications</a>.</li>
+        <li>Anthropic, <a href="https://www.anthropic.com/research">Research</a>.</li>
+        <li>Stanford HAI, <a href="https://hai.stanford.edu/news/transparency-in-ai-is-on-the-decline">Transparency in AI is on the Decline</a>.</li>
+        <li>NIST, <a href="https://www.nist.gov/itl/ai-risk-management-framework">AI Risk Management Framework</a>.</li>
+        <li>Lundberg &amp; Lee, <a href="https://arxiv.org/abs/1705.07874">A Unified Approach to Interpreting Model Predictions (SHAP)</a>.</li>
+      </ul>
+      <a class="back-btn" href="index.html">← Back to portfolio</a>
+    </article></div></section>
+  </main>
+  <footer class="footer"><div class="container">Explainable AI &amp; Trustworthy LLMs · Portfolio Artifact</div></footer>
+</body>
+</html>
